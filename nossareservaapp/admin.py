@@ -16,7 +16,7 @@ class AreaLocacaoAdmin(admin.ModelAdmin):
 
 @admin.register(Condominio)
 class CondominioAdmin(admin.ModelAdmin):
-    list_display = ('nome', 'logo')
+    list_display = ('nome', 'id')
 
 
 

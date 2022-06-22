@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import Usuario, AreaLocacao, AreaComum
+from .models import Usuario, AreaLocacao, AreaComum, Condominio
 
 class UsuarioSerializer(serializers.ModelSerializer):
 
@@ -37,4 +37,11 @@ class AreaLocacaoSerializer(serializers.ModelSerializer):
             'area_comum',
             'data',
         }"""
+        fields = '__all__'
+
+
+class CondominioSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Condominio
         fields = '__all__'

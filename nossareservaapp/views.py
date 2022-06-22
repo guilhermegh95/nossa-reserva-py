@@ -2,8 +2,8 @@ from rest_framework import authentication, permissions
 
 from rest_framework import generics
 
-from .models import Usuario, AreaComum, AreaLocacao
-from .serializers import UsuarioSerializer, AreaComumSerializer, AreaLocacaoSerializer
+from .models import Usuario, AreaComum, AreaLocacao, Condominio
+from .serializers import UsuarioSerializer, AreaComumSerializer, AreaLocacaoSerializer, CondominioSerializer
 
 authentication_classes = [authentication.TokenAuthentication, ]
 permission_classes = [permissions.IsAuthenticatedOrReadOnly, ]
@@ -36,3 +36,13 @@ class AreaLocacaoAPIView(generics.RetrieveUpdateDestroyAPIView):
 class AreaLocacoesAPIView(generics.ListCreateAPIView):
     queryset = AreaLocacao.objects.all()
     serializer_class = AreaLocacaoSerializer
+
+
+class CondominioAPIView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Condominio.objects.all()
+    serializer_class = CondominioSerializer
+
+
+class CondominiosAPIView(generics.ListCreateAPIView):
+    queryset = Condominio.objects.all()
+    serializer_class = CondominioSerializer

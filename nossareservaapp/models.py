@@ -3,7 +3,7 @@ from django.db import models
 class Base(models.Model):
     criacao = models.DateTimeField(auto_now_add=True)
     atualizacao = models.DateTimeField(auto_now=True)
-    ativo = models.BooleanField(default=True)
+
 
     class Meta:
         abstract = True
@@ -22,6 +22,7 @@ class Usuario(Base):
      
 
 class Condominio(Base):
+    id = models.AutoField(primary_key=True)
     nome = models.CharField(max_length=254)
     logo = models.URLField
     

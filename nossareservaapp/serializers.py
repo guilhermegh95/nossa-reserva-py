@@ -2,18 +2,6 @@ from rest_framework import serializers
 
 from .models import Usuario, AreaLocacao, AreaComum, Condominio
 
-class UsuarioSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        extra_kargs = {
-            'email': {'write_only': True}
-        }
-        model = Usuario
-        """
-        fields = {
-            'apartamento',
-        }"""
-        fields = '__all__'
 
 class AreaComumSerializer(serializers.ModelSerializer):
 
@@ -38,6 +26,27 @@ class AreaLocacaoSerializer(serializers.ModelSerializer):
             'data',
         }"""
         fields = '__all__'
+
+
+class UsuarioSerializer(serializers.ModelSerializer):
+    #HyperLinked Related Field
+    locacoes = serializers.HyperlinkedRelatedField(
+        many=True,
+        read_only=True,
+        view_name='arealocacao-detail'
+    )
+
+    class Meta:
+        extra_kargs = {
+            'email': {'write_only': True}
+        }
+        model = Usuario
+        """
+        fields = {
+            'apartamento',
+        }"""
+        fields = '__all__'
+
 
 
 class CondominioSerializer(serializers.ModelSerializer):

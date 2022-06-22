@@ -18,7 +18,7 @@ class Usuario(Base):
         verbose_name_plural = 'Usuarios'
         
     def __str__(self):
-        return self.email
+        return self.apartamento
      
 
 class Condominio(Base):

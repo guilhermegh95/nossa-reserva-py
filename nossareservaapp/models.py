@@ -48,7 +48,7 @@ class AreaComum(Base):
 
 class AreaLocacao(Base):
     id = models.AutoField(primary_key=True)
-    nome_pessoa = models.ForeignKey(Usuario, on_delete=models.CASCADE)
+    nome_pessoa = models.ForeignKey(Usuario, related_name='locacoes', on_delete=models.CASCADE)
     area_comum = models.ForeignKey(AreaComum, on_delete=models.CASCADE)
     data = models.DateField()
 

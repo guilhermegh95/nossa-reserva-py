@@ -1,6 +1,27 @@
 from django.urls import path
 
-from .views import UsuarioAPIView, AreaComumAPIView, AreaLocacaoAPIView, UsuariosAPIView, AreasComunsAPIView, AreaLocacoesAPIView, CondominioAPIView, CondominiosAPIView
+from rest_framework.routers import SimpleRouter
+
+from .views import (
+    UsuarioAPIView,
+    AreaComumAPIView,
+    AreaLocacaoAPIView,
+    UsuariosAPIView,
+    AreasComunsAPIView,
+    AreaLocacoesAPIView,
+    CondominioAPIView,
+    CondominiosAPIView,
+    UsuarioViewSet,
+    AreaComumViewSet,
+    AreaLocacaoViewSet,
+    CondominioViewSet)
+
+router = SimpleRouter()
+router.register('usuarios', UsuarioViewSet)
+router.register('areascomuns', AreaComumViewSet)
+router.register('arealocacoes', AreaLocacaoViewSet)
+router.register('condominio', CondominioViewSet)
+
 
 
 urlpatterns = [

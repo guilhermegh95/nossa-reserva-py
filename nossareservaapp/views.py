@@ -1,6 +1,7 @@
 from rest_framework import authentication, permissions
 
 from rest_framework import generics
+from rest_framework.generics import get_object_or_404
 
 from .models import Usuario, AreaComum, AreaLocacao, Condominio
 from .serializers import UsuarioSerializer, AreaComumSerializer, AreaLocacaoSerializer, CondominioSerializer
@@ -32,10 +33,20 @@ class AreaLocacaoAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = AreaLocacao.objects.all()
     serializer_class = AreaLocacaoSerializer
 
+    def get_object(self):
+        if self.kwargs.get('usuario_pk'):
+            return get_object_or_404(self.get_queryset(), nome_pessoa=self.kwargs.get('nome_pessoa'), pk=self.kwargs.get('locacoes_pk'))
+        return get_object_or_404(self.get_queryset(), pk=self.kwargs.get('locacoes_pk'))
+
 
 class AreaLocacoesAPIView(generics.ListCreateAPIView):
     queryset = AreaLocacao.objects.all()
     serializer_class = AreaLocacaoSerializer
+
+    def get_queryset(self):
+        if self.kwargs.get('usuario_pk'):
+            return self.queryset.filter(nome_pessoa=self.kwargs.get('usuario_pk'))
+        return self.queryset.all()
 
 
 class CondominioAPIView(generics.RetrieveUpdateDestroyAPIView):

@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
 
 class Base(models.Model):
     criacao = models.DateTimeField(auto_now_add=True)
@@ -9,9 +10,17 @@ class Base(models.Model):
         abstract = True
         
 
-class Usuario(Base):
+class Usuario(AbstractBaseUser):
     email = models.EmailField(max_length=254)
     apartamento = models.CharField(max_length=10, primary_key=True)
+    is_active = models.BooleanField(default=True)
+
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS= 'email'
+
+    @property
+    def token(self):
+        return''
     
     class Meta:
         verbose_name = 'Usuario'

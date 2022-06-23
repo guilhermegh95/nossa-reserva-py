@@ -47,6 +47,10 @@ class UsuarioSerializer(serializers.ModelSerializer):
         }"""
         fields = '__all__'
 
+    def create(self, validated_data):
+        user = Usuario.objects.create_user(validated_data['username'], validated_data["password"])
+        return user
+
 
 
 class CondominioSerializer(serializers.ModelSerializer):
